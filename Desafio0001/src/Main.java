@@ -1,17 +1,48 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        int maxDividendo = 1000;
+        List<Integer> divisores = new ArrayList<>(Arrays.asList(3, 5));
+        int valor;
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        valor = somarMultiplos(maxDividendo, divisores);
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+8.
-            System.out.println("i = " + i);
+        System.out.print("A soma dos multiplos de ");
+        for (int i = 0; i < divisores.size(); i++) {
+            if (i == (divisores.size() - 1)) {
+                System.out.printf("ou %d, ", divisores.get(i));
+            } else if (i == 0) {
+                System.out.printf("%d ", divisores.get(i));
+            } else {
+                System.out.printf(", %d ", divisores.get(i));
+            }
         }
+        System.out.printf("ate %d, e: %d\n", maxDividendo, valor);
+    }
+
+    public static int somarMultiplos(int maxDividendo, List<Integer> divisores) {
+        int somaMultiplos = 0;
+        for(int i = 1; i < maxDividendo; i++) {
+            if (verificarDivisibilidade(i, divisores)) {
+                System.out.printf("Multiplo: %d\n", i);
+                somaMultiplos += i;
+            }
+        }
+
+        return  somaMultiplos;
+    }
+
+    public static boolean verificarDivisibilidade(int dividendo, List<Integer> divisores) {
+        for (int divisor : divisores) {
+            int resto = dividendo % divisor;
+            if (resto == 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
